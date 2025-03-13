@@ -16,7 +16,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const helmet = require('helmet');
-const dbUrl = 'mongodb://127.0.0.1:27017/camp-connect'
+const dbUrl = process.env.DB_URL;
 const mongoSanitize = require('express-mongo-sanitize');
 const MongoStore = require('connect-mongo');
 
