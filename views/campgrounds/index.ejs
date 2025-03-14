@@ -1,22 +1,26 @@
 <% layout('layouts/boilerplate')%>
-<div id="map"></div>
+
+<div id="map" class="mb-4"></div>
+
 <div class="container">
     <h1 class="text-center my-4">All Campgrounds</h1>
 
     <div class="row">
         <% campgrounds.forEach(campground => { %>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 d-flex flex-column shadow">
                     <% if (campground.images.length) { %>
-                        <img class="card-img-top" src="<%= campground.images[0].url %>" alt="">
+                        <img class="card-img-top" src="<%= campground.images[0].url %>" alt="Campground Image">
                     <% } else { %>
-                        <img class="card-img-top" src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png" alt="">
+                        <img class="card-img-top" src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png" alt="Default Image">
                     <% } %>
-                    <div class="card-body">
+                    <div class="card-body flex-grow-1">
                         <h5 class="card-title"><%= campground.title %></h5>
                         <p class="card-text"><%= campground.description.substring(0, 100) %>...</p>
                         <p class="text-muted"><%= campground.location %></p>
-                        <a class="btn btn-primary" href="/campgrounds/<%=campground._id%>">View</a>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">View</a>
                     </div>
                 </div>
             </div>
@@ -26,7 +30,7 @@
 
 <script>
     const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
-    const campgrounds = { features: <%- JSON.stringify(campgrounds) %>}
+    const campgrounds = { features: <%- JSON.stringify(campgrounds) %> }
 </script>
 
 <script src="/javascripts/clusterMap.js"></script>
